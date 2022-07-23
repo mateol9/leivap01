@@ -1,0 +1,44 @@
+.nav{
+    background: linear-gradient(to top, #16171a, #1c2f33);
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 25px;
+}
+
+.navBrand{
+    color: white;
+    font-size: 1.5rem;
+    position: relative;
+    cursor: default;
+    margin-bottom: 12px;
+}
+
+.navBrand::before{
+    content: '';
+    width: 100%;
+    height: 5px;
+    background-color: white;
+    position: absolute;
+    bottom: -7px;
+    transform: scale(0.9);
+    border-radius: 100%;
+}
+
+.navFilter{
+    display: flex;
+    gap: 25px;
+}
+
+.navFilter button{
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid white;
+    border-radius: 12px;
+    color: white;
+    background: transparent;
+}
