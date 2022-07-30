@@ -9,10 +9,10 @@ const Navbar = () =>{
             </div>
 
             <div className='navFilter'>
-                <button>Categoria 1</button>
-                <button>Categoria 2</button>
-                <button>Categoria 3</button>
-                <button>Categoria 4</button>
+                <button>Procesadores</button>
+                <button>Tarjetas Graficas</button>
+                <button>Motherboards</button>
+                <button>Perifericos</button>
             </div>
 
             <CartWidget />

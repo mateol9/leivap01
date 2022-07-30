@@ -1,0 +1,36 @@
+.counterContainer{
+    padding: 30px;
+    box-sizing: border-box;
+    border: 2px solid white;
+    border-radius: 15px;
+    width: 400px;
+    margin: 0 auto 50px;
+}
+
+.countSpan{
+    color: white;
+    text-align: center;
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.counterBtn{
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #1c2f33;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.counterBtn:hover{
+    background-color: #2e5158;
+}
