@@ -1,0 +1,43 @@
+.itemDetail{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    gap: 50px;
+    margin-bottom: 100px;
+}
+
+.detailImgContainer img{
+    width: 500px;
+    height: 500px;
+}
+
+.detailInfoContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
+.detailTitle{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.detailBuyBtn{
+    font-size: 15px;
+    width: 100%;
+    font-weight: bold;
+    background-color: #1c2f33;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    height: 50px;
+}
+
+.detailBuyBtn:hover{
+    background-color: #2e5158;
+}

@@ -18,19 +18,25 @@
 
 .itemCard img{
     width: 100%;
+    height: 100%;
     background-color: white;
+    object-fit: contain;
 }
 
 .itemCardText{
     color: white;
 }
 
-.itemCard button{
+.itemCardBtn{
+    text-align: center;
     color: white;
-    background-color: #1c2f33;
     border: white solid 2px;
     font-size: 15px;
     padding: 10px;
     border-radius: 15px;
-    cursor: pointer;
+    text-decoration: none;
+}
+
+.itemCardBtn:hover{
+    background-color: #25464d;
 }

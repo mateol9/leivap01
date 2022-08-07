@@ -1,23 +1,25 @@
 .counterContainer{
-    padding: 30px;
+    padding: 10px;
     box-sizing: border-box;
-    border: 2px solid white;
-    border-radius: 15px;
-    width: 400px;
-    margin: 0 auto 50px;
+    width: 300px;
+    margin: 0 auto;
 }
 
 .countSpan{
     color: white;
     text-align: center;
-    font-size: 50px;
-    margin-bottom: 15px;
+    font-size: 25px;
+    margin-bottom: 5px;
 }
 
 .buttonContainer{
     display: flex;
     justify-content: center;
-    gap: 20px;
+    align-items: center;
+    height: 100px;
+    border: 2px solid white;
+    border-radius: 15px;
+    gap: 10px;
 }
 
 .counterBtn{
@@ -26,9 +28,10 @@
     background-color: #1c2f33;
     color: white;
     border: none;
-    padding: 15px;
+    padding: 10px;
     border-radius: 15px;
     cursor: pointer;
+    height: 50px;
 }
 
 .counterBtn:hover{
