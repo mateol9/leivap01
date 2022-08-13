@@ -1,8 +1,8 @@
 import { useState } from "react";
 import './Counter.css'
 
-const Counter = ({stock, onAdd}) => {
-    const [count, setCount] = useState(1);
+const Counter = ({stock = 0, onAdd, initial = 1}) => {
+    const [count, setCount] = useState(initial);
 
     const countUp = () => count < stock ? setCount(count + 1) : null;
 

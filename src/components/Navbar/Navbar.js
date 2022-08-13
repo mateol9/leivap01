@@ -1,6 +1,6 @@
 import './Navbar.css'
 import CartWidget from '../CartWidget/CartWidget';
-import { Link } from 'react-router-dom';
+import { Link, NavLink} from 'react-router-dom';
 
 const Navbar = () =>{
     return(
@@ -8,10 +8,10 @@ const Navbar = () =>{
             <Link to='/' className='navBrand'>E-Commerce</Link>
 
             <div className='navFilter'>
-                <Link to='/category/procesadores' className='navLink'>Procesadores</Link>
-                <Link to='/category/graficas' className='navLink'>Tarjetas Graficas</Link>
-                <Link to='/category/motherboards' className='navLink'>Motherboards</Link>
-                <Link to='/category/perifericos' className='navLink'>Perifericos</Link>
+                <NavLink to='/category/procesadores' className='navLink'>Procesadores</NavLink>
+                <NavLink to='/category/graficas' className='navLink'>Tarjetas Graficas</NavLink>
+                <NavLink to='/category/motherboards' className='navLink'>Motherboards</NavLink>
+                <NavLink to='/category/perifericos' className='navLink'>Perifericos</NavLink>
             </div>
 
             <CartWidget />

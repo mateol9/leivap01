@@ -1,11 +1,13 @@
 .cartWidgetContainer{
-    cursor: default;
     display: flex;
     align-items: center;
-    gap: 5px;
-    color: white;
     border: 2px solid white;
     padding: 10px;
     border-radius: 12px;
     font-size: 1.2rem;
+}
+
+.cartWidgetContainer a{
+    text-decoration: none;
+    color: white;
 }

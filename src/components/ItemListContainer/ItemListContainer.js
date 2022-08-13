@@ -7,18 +7,28 @@ import ItemList from "../ItemList/ItemList";
 
 const ItemListContainer = ({ label }) => {
     const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const { categoryId } = useParams();
 
     useEffect(() => {
         const asyncFunction = categoryId ? getProductsByCategory : getProducts;
 
-        asyncFunction(categoryId).then(response => {
-            setProducts(response);
-        }).catch(error => {
-            console.log(error);
-        });
+        asyncFunction(categoryId)
+            .then(response => {
+                setProducts(response);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     }, [categoryId]);
+
+    if (loading) {
+        return <h1>Cargando Productos...</h1>
+    }
 
     return(
         <>
