@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 
 const Cart = () => {
     const { cart, clearCart, removeItem } = useContext(CartContext);
+    let totalPrice = 0;
+    cart.map(prod => totalPrice += prod.price * prod.quantity)
 
     return(
         cart.length === 0 ?
@@ -22,13 +24,15 @@ const Cart = () => {
                     <img src={prod.img}></img>
                     <div className='cartText'>
                         <Link to={`/detail/${prod.id}`}>{prod.name}</Link>
-                        <p>${prod.price}</p>
+                        <p>Precio Unitario: ${prod.price}</p>
                         <p>Cantidad: {prod.quantity}</p>
+                        <p>Subtotal: ${prod.price * prod.quantity}</p>
                         <button onClick={() => removeItem(prod.id)}>Eliminar Producto</button>
                     </div>
                 </div>
             )
             )}
+            <p>Precio Total: ${totalPrice}</p>
             <button onClick={() => clearCart()}>Limpiar Carrito</button>
             <Link to='/buy'>Comprar</Link>
         </div>
