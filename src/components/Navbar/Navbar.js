@@ -12,9 +12,8 @@ const Navbar = () =>{
                 <NavLink to='/category/graficas' className='navLink'>Tarjetas Graficas</NavLink>
                 <NavLink to='/category/motherboards' className='navLink'>Motherboards</NavLink>
                 <NavLink to='/category/perifericos' className='navLink'>Perifericos</NavLink>
+                <CartWidget />
             </div>
-
-            <CartWidget />
         </nav>
     );
 }

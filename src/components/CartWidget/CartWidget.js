@@ -9,7 +9,7 @@ const CartWidget = () => {
     const quantity = getQuantity();
 
     return(
-        <div className='cartWidgetContainer'>
+        <div className={quantity === 0 ? 'cartWidgetHidden' : 'cartWidgetContainer'}>
             <Link to='/cart'>
                 <i className="fa-solid fa-cart-shopping" />
                 <span>{quantity}</span>

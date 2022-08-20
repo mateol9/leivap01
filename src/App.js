@@ -2,6 +2,7 @@ import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import ItemListContainer from './components/ItemListContainer/ItemListContainer';
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
+import Cart from './components/Cart/Cart';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CartContextProvider } from './context/CartContext';
 
@@ -16,6 +17,7 @@ function App() {
             <Route path='/category/:categoryId' element={<ItemListContainer label='Lista Filtrada'/>}/>
             <Route path='/detail/:productId' element={<ItemDetailContainer />} />
             <Route path='*' element={<h1>404 NOT FOUND</h1>} />
+            <Route path='/cart' element={<Cart />} />
           </Routes>
         </BrowserRouter>
       </CartContextProvider>

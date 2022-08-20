@@ -13,7 +13,7 @@ const ItemDetail = ({ id, name, brand, price, img, stock }) => {
         setQuantityToAdd(quantity);
 
         const productToAdd = {
-            id, name, price, quantity
+            id, name, price, img, quantity
         }
 
         addItem(productToAdd);
@@ -34,11 +34,13 @@ const ItemDetail = ({ id, name, brand, price, img, stock }) => {
                 <p className='detailText'>Unidades Disponibles: {stock}</p>
                 <div>
                     {
-                        quantityToAdd === 0 ? (
+                        quantityToAdd === 0 ? 
                             <Counter stock={stock} onAdd={handleOnAdd} initial={productQuantity}/>
-                        ) : (
-                            <Link to='/cart' className='detailBuyBtn'>Finalizar Compra</Link>
-                        )
+                         : 
+                            <>
+                                <Link to='/cart' className='detailBuyBtn'>Finalizar Compra</Link>
+                                <Link to='/' className='detailBuyBtn'>Seguir Comprando</Link>
+                            </>
                     }
                 </div>
             </div>

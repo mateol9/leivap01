@@ -2,6 +2,7 @@
     background: linear-gradient(to top, #16171a, #1c2f33);
     height: 80px;
     display: flex;
+    width: 100%;
     justify-content: space-between;
     align-items: center;
     padding: 0 25px;
@@ -37,7 +38,6 @@
     font-size: 1.2rem;
     padding: 10px;
     border: none;
-    border-bottom: 2px solid white;
     border-radius: 12px;
     color: white;
     background: transparent;

@@ -1,7 +1,6 @@
 .itemCard{
     display: flex;
     flex-direction: column;
-    border: 2px solid white;
     border-radius: 15px;
     padding: 20px;
     width: 250px;
@@ -28,9 +27,9 @@
 }
 
 .itemCardBtn{
+    background-color: #17272b;
     text-align: center;
     color: white;
-    border: white solid 2px;
     font-size: 15px;
     padding: 10px;
     border-radius: 15px;

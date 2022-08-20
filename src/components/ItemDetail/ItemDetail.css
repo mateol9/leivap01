@@ -26,8 +26,11 @@
 }
 
 .detailBuyBtn{
+    display: block;
+    text-align: center;
+    margin-bottom: 15px;
+    text-decoration: none;
     font-size: 15px;
-    width: 100%;
     font-weight: bold;
     background-color: #1c2f33;
     color: white;
@@ -35,7 +38,6 @@
     padding: 10px;
     border-radius: 15px;
     cursor: pointer;
-    height: 50px;
 }
 
 .detailBuyBtn:hover{
