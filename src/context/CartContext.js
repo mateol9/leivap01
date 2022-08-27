@@ -3,62 +3,71 @@ import { useState, createContext } from "react";
 const CartContext = createContext();
 
 export const CartContextProvider = ({ children }) => {
-    const [cart, setCart] = useState([]);
-    console.log(cart);
-    
-    const addItem = (productToAdd) => {
-        if(isInCart(productToAdd.id)) {
-            const cartUpdated = cart.map(prod => {
-                if(prod.id === productToAdd.id) {
-                    const productUpdated = {
-                        ...prod,
-                        quantity: productToAdd.quantity
-                    }
-                    return productUpdated;
-                } else {
-                    return prod;
-                }
-            });
+  const [cart, setCart] = useState([]);
 
-            setCart(cartUpdated);
+  const addItem = (productToAdd) => {
+    if (isInCart(productToAdd.id)) {
+      const cartUpdated = cart.map(prod => {
+        if (prod.id === productToAdd.id) {
+          const productUpdated = {
+            ...prod,
+            quantity: productToAdd.quantity
+          }
+          return productUpdated;
         } else {
-            setCart([...cart, productToAdd]);
+          return prod;
         }
-    };
-    
-    const isInCart = (id) => {
-        return cart.some(prod => prod.id === id);
+      });
+
+      setCart(cartUpdated);
+    } else {
+      setCart([...cart, productToAdd]);
     }
+  };
 
-    const clearCart = () => {
-        setCart([]);
-    }
+  const isInCart = (id) => {
+    return cart.some(prod => prod.id === id);
+  }
 
-    const removeItem = (id) => {
-        const filteredCart = cart.filter(prod => prod.id !== id);
-        setCart(filteredCart);
-    }
+  const clearCart = () => {
+    setCart([]);
+  }
 
-    const getQuantity = () => {
-        let acc = 0;
+  const removeItem = (id) => {
+    const filteredCart = cart.filter(prod => prod.id !== id);
+    setCart(filteredCart);
+  }
 
-        cart.forEach(prod => {
-            acc += prod.quantity
-        });
-        
-        return acc;
-    }
+  const getQuantity = () => {
+    let acc = 0;
 
-    const getProductQuantity = (id) => {
-        const product = cart.find(prod => prod.id === id);
-        return product?.quantity;
-    }
+    cart.forEach(prod => {
+      acc += prod.quantity
+    });
 
-    return (
-        <CartContext.Provider value={{ cart, addItem, clearCart, removeItem, isInCart, getQuantity, getProductQuantity }}>
-            {children}
-        </CartContext.Provider>
-    )
+    return acc;
+  }
+
+  const getProductQuantity = (id) => {
+    const product = cart.find(prod => prod.id === id);
+    return product?.quantity;
+  }
+
+  const getTotal = () => {
+    let accu = 0
+
+    cart.forEach(prod => {
+      accu += prod.quantity * prod.price
+    })
+
+    return accu
+  }
+
+  return (
+    <CartContext.Provider value={{ cart, addItem, clearCart, removeItem, isInCart, getQuantity, getProductQuantity, getTotal }}>
+      {children}
+    </CartContext.Provider>
+  )
 }
 
 export default CartContext;
