@@ -1,39 +1,27 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ItemDetail from "../ItemDetail/ItemDetail";
-import { getDoc, doc } from 'firebase/firestore'
-import { gec } from '../../services/firebase' 
+import { getProductDetail } from "../../services/firebase/firestore";
+import { useAsync } from "../../hooks/useAsync";
 
 const ItemDetailContainer = () => {
-    const [product, setProduct] = useState();
-    const [loading, setLoading] = useState(true);
-
     const { productId } = useParams();
 
-    useEffect(() => {
+    const getProductDetailFs = () => getProductDetail(productId);
 
-        getDoc(doc(gec, 'products', productId))
-            .then(response => {
-                const data = response.data();
-                const newProduct = { id: response.id, ...data }
-                setProduct(newProduct);
-            })
-            .catch(error => {
-                console.log(error);
-            })
-            .finally(() => {
-                setLoading(false);
-            })
-    }, [productId])
+    const { data, error, loading } = useAsync(getProductDetailFs, [productId])
 
     if (loading) {
         return <h1>Cargando...</h1>
     }
-    
-    return(
+
+    if (error) {
+        return <h1>Se produjo un error inesperado</h1>
+    }
+
+    return (
         <div>
             <h1>Detalle del Producto</h1>
-            <ItemDetail {...product}/> 
+            <ItemDetail {...data} />
         </div>
     )
 }

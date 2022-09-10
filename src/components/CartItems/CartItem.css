@@ -1,0 +1,11 @@
+.cartItems{
+  border: 2px solid white;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  margin: 0 100px 30px;
+}
+
+.cartItems img {
+  width: 150px;
+}

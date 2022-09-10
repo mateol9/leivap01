@@ -1,14 +1,13 @@
 import './CartWidget.css'
-import { useContext } from "react";
 import { Link } from "react-router-dom";
-import CartContext from '../../context/CartContext';
+import { useCartContext } from '../../context/CartContext';
 
 const CartWidget = () => {
-    const { getQuantity } = useContext(CartContext);
+    const { getQuantity } = useCartContext();
 
     const quantity = getQuantity();
 
-    return(
+    return (
         <div className={quantity === 0 ? 'cartWidgetHidden' : 'cartWidgetContainer'}>
             <Link to='/cart'>
                 <i className="fa-solid fa-cart-shopping" />

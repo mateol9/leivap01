@@ -1,13 +1,14 @@
 import './Checkout.css';
-import { useState, useContext } from "react"
-import CartContext from "../../context/CartContext"
+import { useState } from "react"
+import { useCartContext } from "../../context/CartContext"
 import { useNavigate } from 'react-router-dom'
-import { gec } from "../../services/firebase"
+import { db } from "../../services/firebase"
 import { addDoc, collection, getDocs, query, where, documentId, writeBatch } from "firebase/firestore"
+import CheckForm from '../CheckForm/CheckForm';
 
 const Checkout = () => {
 
-  const { cart, getQuantity, getTotal, clearCart } = useContext(CartContext)
+  const { cart, getQuantity, getTotal, clearCart } = useCartContext();
   const [isLoading, setIsLoading] = useState(false)
   const [orderCreated, setOrderCreated] = useState(false)
   const [orderInfo, setOrderInfo] = useState({});
@@ -16,8 +17,6 @@ const Checkout = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  // const [disabled, setDisabled] = useState(true);
-  console.log(orderInfo);
 
   const navigate = useNavigate()
 
@@ -42,7 +41,7 @@ const Checkout = () => {
 
       const ids = cart.map(prod => prod.id)
 
-      const productsRef = collection(gec, 'products')
+      const productsRef = collection(db, 'products')
 
       const productsAddedFromFirestore = await getDocs(query(productsRef, where(documentId(), 'in', ids)))
 
@@ -50,17 +49,17 @@ const Checkout = () => {
 
       const outOfStock = []
 
-      const batch = writeBatch(gec)
+      const batch = writeBatch(db)
 
       docs.forEach(doc => {
         const dataDoc = doc.data()
-        const stockGec = dataDoc.stock
+        const stockDb = dataDoc.stock
 
         const productAddedToCart = cart.find(prod => prod.id === doc.id)
         const prodQuantity = productAddedToCart?.quantity
 
-        if (stockGec >= prodQuantity) {
-          batch.update(doc.ref, { stock: stockGec - prodQuantity })
+        if (stockDb >= prodQuantity) {
+          batch.update(doc.ref, { stock: stockDb - prodQuantity })
         } else {
           outOfStock.push({ id: doc.id, ...dataDoc })
         }
@@ -69,7 +68,7 @@ const Checkout = () => {
       if (outOfStock.length === 0) {
         await batch.commit()
 
-        const orderRef = collection(gec, 'orders')
+        const orderRef = collection(db, 'orders')
         const orderAdded = await addDoc(orderRef, objOrder)
 
         clearCart()
@@ -85,26 +84,6 @@ const Checkout = () => {
       setIsLoading(false)
     }
   }
-
-  const validate = () => {
-    if (/\d/.test(name) && name !== '') {
-      return 'Tu nombre no puede contener numeros'
-    }
-
-    if (!(email.includes('@') && email.includes('.')) && email !== '') {
-      return 'Formato de email incorrecto'
-    }
-  }
-
-  const isBtnDisabled = () => {
-    if (!(email.includes('@') && email.includes('.')) || /\d/.test(name) || phone === '') {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  isBtnDisabled();
 
   if (isLoading) {
     return <h1>Su orden de compra esta siendo generada...</h1>
@@ -129,16 +108,14 @@ const Checkout = () => {
   }
 
   return (
-    <div className='checkoutContainer'>
-      <h1>Checkout</h1>
-      <span style={{ color: 'red' }}>{validate()}</span>
-      <form>
-        <input placeholder='Nombre' onChange={(e) => setName(e.target.value)} value={name}></input>
-        <input placeholder='Email' onChange={(e) => setEmail(e.target.value)} value={email}></input>
-        <input placeholder='Telefono' onChange={(e) => { if (!isNaN(e.target.value)) setPhone(e.target.value) }} value={phone}></input>
-        <button className={isBtnDisabled() ? 'checkoutBtnDisabled' : 'checkoutBtnEnabled'} onClick={createOrder} disabled={isBtnDisabled()}>Generar Orden</button>
-      </form>
-    </div>
+    <CheckForm
+      name={name}
+      setName={setName}
+      phone={phone}
+      setPhone={setPhone}
+      email={email}
+      setEmail={setEmail}
+      createOrder={createOrder} />
   )
 
 }

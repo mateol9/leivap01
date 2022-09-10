@@ -1,9 +1,9 @@
 import './Navbar.css'
 import CartWidget from '../CartWidget/CartWidget';
-import { Link, NavLink} from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
-const Navbar = () =>{
-    return(
+const Navbar = () => {
+    return (
         <nav className='nav'>
             <Link to='/' className='navBrand'>E-Commerce</Link>
 

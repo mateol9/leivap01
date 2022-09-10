@@ -1,47 +1,28 @@
 import './ItemListContainer.css';
-import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ItemList from "../ItemList/ItemList";
-import { getDocs, collection, query, where } from 'firebase/firestore';
-import { gec } from '../../services/firebase';
-
+import { getProducts } from '../../services/firebase/firestore';
+import { useAsync } from '../../hooks/useAsync';
 
 const ItemListContainer = ({ label }) => {
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
-
     const { categoryId } = useParams();
 
-    useEffect(() => {
-        setLoading(true);
-        const collectionFiltered = !categoryId 
-        ? collection(gec, 'products')
-        : query(collection(gec, 'products'), where('category', '==', categoryId));
+    const getProductsFs = () => getProducts(categoryId);
 
-        getDocs(collectionFiltered)
-            .then(response => {
-                const newProducts = response.docs.map(doc => {
-                    const data = doc.data();
-                    return { id: doc.id, ...data }
-                })
-                setProducts(newProducts)
-            })
-            .catch(error => {
-                console.log(error);
-            })
-            .finally(() => {
-                setLoading(false)
-            })
-    }, [categoryId]);
+    const { data, error, loading } = useAsync(getProductsFs, [categoryId]);
 
     if (loading) {
         return <h1>Cargando Productos...</h1>
     }
 
-    return(
+    if (error) {
+        return <h1>Se produjo un error inesperado</h1>
+    }
+
+    return (
         <>
-            <h1>{label}</h1>
-            <ItemList products={products}/>
+            <h1>{`${label} ${categoryId || ''}`}</h1>
+            <ItemList products={data} />
         </>
     )
 }
