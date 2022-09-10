@@ -39,7 +39,7 @@
     5) npm start
 
 ## Navegacion
-
+![unknown_2022 09 09-21 48](https://user-images.githubusercontent.com/100333702/189498562-e25b739d-ee56-4c89-8557-3a279d48301e.gif)
 
 ## Deploy
 - https://gcommerce.netlify.app/
